@@ -99,7 +99,7 @@ export async function finishRentals(req, res) {
       `
       SELECT rentals.*, games."pricePerDay" AS "pricePerDay" 
       FROM rentals
-      JOIN games ON games.id-rentals."gameId"
+      JOIN games ON games.id=rentals."gameId"
       WHERE rentals.id=$1
     `,
       [id]
@@ -120,6 +120,7 @@ export async function finishRentals(req, res) {
 
     res.sendStatus(200);
   } catch (error) {
+    console.log(error);
     res.sendStatus(500);
   }
 }
